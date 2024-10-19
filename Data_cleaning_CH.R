@@ -36,7 +36,7 @@ df_covid <- bind_rows(df_covid %>% filter(time < start_time), interp_df)
 
 # create final dataset --------------------------------------------------------------
 
-df_data<-readxl::read_xlsx("inputData/Data_prof.xlsx")
+df_data<-readxl::read_xlsx("inputData/raw_CH.xlsx")
 names(df_data)<-c("date","GDP","CPI_core","CPI_2020", "interest")
 df_data$date<- df_data$date %>% as.Date()
 
@@ -44,7 +44,7 @@ df_data$date<- df_data$date %>% as.Date()
 
 df_data<- df_data %>%
   mutate(
-    gdp.log = log(GDP),
+    gdp.log = log(GDP, base = exp(1)),
     inflation = (CPI_2020 - lag(CPI_2020)) / lag(CPI_2020),
     inflation = (1 + inflation)^4 - 1,  # Annualize inflation
     inflation.expectations = (lag(inflation, 1) + lag(inflation, 2) + lag(inflation, 3) + lag(inflation, 4)) / 4

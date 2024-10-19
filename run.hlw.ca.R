@@ -164,7 +164,7 @@ if (use.kappa) {
 # =================
 
 # Read input data from FRBNY website
-ca.data <- read.xlsx("inputData/Holston_Laubach_Williams_estimates.xlsx", sheet="CA input data",
+ca.data <- read.xlsx("inputData/Input.xlsx", sheet="CA input data",
                       na.strings = ".", colNames=TRUE, rowNames=FALSE, detectDates = TRUE)
 
 ca.log.output             <- ca.data$gdp.log
